@@ -1,81 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghazanfar ki Website</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meri Website — Demo</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f9;
-      color: #333;
+    :root{
+      --bg:#f7f8fb; --accent:#0ea5a4; --dark:#0b1220; --card:#ffffff;
+      --maxw:1100px;
     }
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    section {
-      padding: 40px;
-      text-align: center;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 20px auto;
-      width: 60%;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    h2 {
-      color: #2c3e50;
-    }
-    footer {
-      background: #2c3e50;
-      color: white;
-      padding: 10px;
-      text-align: center;
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#06b6d4);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#022}
+    nav a{margin-left:16px;text-decoration:none;color:inherit;font-weight:600;opacity:.85}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:40px 0}
+    .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(11,18,32,.05)}
+    h1{font-size:28px;margin:0 0 10px}
+    p.lead{margin:0 0 18px;color:#475569}
+    .btn{background:var(--accent);color:#022;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .feature{padding:16px;border-radius:8px;background:#fff;box-shadow:0 4px 12px rgba(2,6,23,.03)}
+    .gallery{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .gallery img{width:calc(33.333% - 8px);border-radius:8px}
+    footer{padding:28px 0;text-align:center;color:#64748b}
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; text-align:center}
+      .gallery img{width:calc(50% - 8px)}
+      .features{grid-template-columns:repeat(2,1fr)}
+      nav{display:none}
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">M</div>
+        <div>
+          <div style="font-size:14px">Mubashir</div>
+          <div style="font-size:11px;color:#6b7280">Coding & Projects</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <header>
-    <h1>🌐 Welcome to Ghazanfar's Website</h1>
-    <p>Meri Personal Information</p>
-  </header>
+    <section class="hero">
+      <div>
+        <div class="card">
+          <h1>Mubashir ki Demo Site</h1>
+          <p class="lead">Yeh template tumhare project ka start ho sakta hai. Simple, responsive aur easily editable.</p>
+          <a class="btn" href="#contact">Contact karo</a>
+          <div class="features" style="margin-top:18px">
+            <div class="feature"><strong>Fast</strong><div style="font-size:13px;color:#64748b">Lightweight HTML/CSS</div></div>
+            <div class="feature"><strong>Responsive</strong><div style="font-size:13px;color:#64748b">Mobile-friendly layout</div></div>
+            <div class="feature"><strong>Easy to edit</strong><div style="font-size:13px;color:#64748b">Text / colors / images replace karo</div></div>
+          </div>
+        </div>
+      </div>
 
-  <section>
-    <div class="card">
-      <h2>👤 About Me</h2>
-      <p><b>Name:</b> Ghazanfar</p>
-      <p><b>Age:</b> 13</p>
-      <p><b>Class:</b> 8th</p>
-    </div>
+      <div>
+        <div class="card">
+          <h3>Preview</h3>
+          <div class="gallery">
+            <img src="https://via.placeholder.com/400x230?text=Image+1" alt="">
+            <img src="https://via.placeholder.com/400x230?text=Image+2" alt="">
+            <img src="https://via.placeholder.com/400x230?text=Image+3" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>📚 Education</h2>
-      <p>Currently studying in 8th class.</p>
-      <p>Favorite Subject: Computer Science</p>
-    </div>
+    <section id="about" style="margin-top:18px">
+      <div class="card">
+        <h2>About</h2>
+        <p>Yahan apna short bio likho — name, age, class, skills wagairah. Replace kar do jo chahte ho.</p>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>🎮 Hobbies</h2>
-      <p>I love coding, playing Minecraft and Roblox, and learning new things.</p>
-    </div>
+    <section id="work" style="margin-top:18px">
+      <div class="card">
+        <h2>Work / Projects</h2>
+        <p style="color:#64748b">Project list ya links yahan dalo.</p>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>📩 Contact</h2>
-      <p>Email: <a href="mailto:chotagamer2233@gmail.com">chotagamer2233@gmail.com</a></p>
-    </div>
-  </section>
+    <section id="contact" style="margin-top:18px">
+      <div class="card">
+        <h2>Contact</h2>
+        <!-- Formspree example: replace action URL with your own formspree endpoint -->
+        <form action="https://formspree.io/f/your-id" method="POST">
+          <div style="display:flex;gap:8px">
+            <input name="name" placeholder="Naam" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef6">
+            <input name="email" placeholder="Email" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef6">
+          </div><br>
+          <textarea name="message" rows="4" placeholder="Message" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef6"></textarea><br>
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 Ghazanfar | All Rights Reserved</p>
-  </footer>
-
+    <footer>
+      &copy; 2025 Mubashir — Built with ❤️
+    </footer>
+  </div>
 </body>
 </html>
