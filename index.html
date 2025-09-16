@@ -3,112 +3,222 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Meri Website — Demo</title>
+  <title>BladeMC — Play Now</title>
+  <meta name="description" content="BladeMC — Play the best Minecraft gamemodes. Join blademc.fun" />
   <style>
+    /* ---- Basic theme (AppleMC-like look) ---- */
     :root{
-      --bg:#f7f8fb; --accent:#0ea5a4; --dark:#0b1220; --card:#ffffff;
-      --maxw:1100px;
+      --bg1: #071122; --bg2: #071226;
+      --card: rgba(255,255,255,0.03);
+      --muted: #9fb0bd;
+      --accent: #00d1b2;
+      --accent2:#64f3d6;
+      --glass: rgba(255,255,255,0.03);
+      --maxw:1200px;
+      --radius:14px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:28px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-    .logo{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#06b6d4);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#022}
-    nav a{margin-left:16px;text-decoration:none;color:inherit;font-weight:600;opacity:.85}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:40px 0}
-    .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(11,18,32,.05)}
-    h1{font-size:28px;margin:0 0 10px}
-    p.lead{margin:0 0 18px;color:#475569}
-    .btn{background:var(--accent);color:#022;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-    .feature{padding:16px;border-radius:8px;background:#fff;box-shadow:0 4px 12px rgba(2,6,23,.03)}
-    .gallery{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .gallery img{width:calc(33.333% - 8px);border-radius:8px}
-    footer{padding:28px 0;text-align:center;color:#64748b}
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr; text-align:center}
-      .gallery img{width:calc(50% - 8px)}
-      .features{grid-template-columns:repeat(2,1fr)}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      color: #e8f3f6;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex;align-items:center;justify-content:center;font-weight:900;color:#022;font-size:26px;
+    }
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);font-weight:600}
+    .cta{background:var(--accent);color:#012;padding:10px 14px;border-radius:10px;font-weight:800}
+
+    /* hero */
+    .hero{display:flex;gap:24px;align-items:flex-start;margin-top:18px}
+    .hero-left{flex:1}
+    .title{font-size:40px;margin:0 0 8px;line-height:1.03}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .ip-card{
+      background:var(--card);padding:16px;border-radius:12px;width:380px;box-shadow:0 8px 30px rgba(2,6,23,.6);
+    }
+    .ip-label{font-size:12px;color:var(--muted)}
+    .ip-big{display:inline-block;margin-top:6px;padding:8px 12px;border-radius:10px;background:#eafdf7;color:#012;font-weight:800}
+    .copy-btn{margin-left:8px;padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);cursor:pointer}
+    .play-btn{display:inline-block;background:#12b981;color:#021;padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none}
+
+    /* content columns */
+    .content{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:22px}
+    .card{background:var(--card);padding:16px;border-radius:12px}
+    .post{border-radius:10px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:12px}
+    .post h3{margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+
+    /* footer */
+    footer{margin-top:22px;text-align:center;color:var(--muted);padding:18px 0}
+
+    /* responsive */
+    @media(max-width:980px){
+      .hero{flex-direction:column}
+      .content{grid-template-columns:1fr}
       nav{display:none}
+      .ip-card{width:100%}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <header>
       <div class="brand">
-        <div class="logo">M</div>
+        <div class="logo">B</div>
         <div>
-          <div style="font-size:14px">Mubashir</div>
-          <div style="font-size:11px;color:#6b7280">Coding & Projects</div>
+          <div style="font-weight:800;font-size:16px">BladeMC</div>
+          <div style="font-size:12px;color:var(--muted)">Network • Lifesteal • SMP • FFA</div>
         </div>
       </div>
+
       <nav>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
+        <a href="#">Home</a>
+        <a href="#">Rules</a>
+        <a href="#">Vote</a>
+        <a href="#">Map</a>
+        <a href="#">Store</a>
+        <a href="#">Staff</a>
+        <a class="cta" href="#">Play</a>
       </nav>
     </header>
 
     <section class="hero">
-      <div>
-        <div class="card">
-          <h1>Mubashir ki Demo Site</h1>
-          <p class="lead">Yeh template tumhare project ka start ho sakta hai. Simple, responsive aur easily editable.</p>
-          <a class="btn" href="#contact">Contact karo</a>
-          <div class="features" style="margin-top:18px">
-            <div class="feature"><strong>Fast</strong><div style="font-size:13px;color:#64748b">Lightweight HTML/CSS</div></div>
-            <div class="feature"><strong>Responsive</strong><div style="font-size:13px;color:#64748b">Mobile-friendly layout</div></div>
-            <div class="feature"><strong>Easy to edit</strong><div style="font-size:13px;color:#64748b">Text / colors / images replace karo</div></div>
+      <div class="hero-left">
+        <div class="card" style="background:transparent;padding:0">
+          <h1 class="title">BladeMC — Join the Adventure</h1>
+          <p class="subtitle">Join BladeMC.fun for the best Lifesteal & Survival SMP experience. Fast queues, active staff and weekly events.</p>
+
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <div class="ip-card">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div class="ip-label">Server IP</div>
+                  <div><span class="ip-big" id="server-ip">blademc.fun</span></div>
+                </div>
+                <div style="text-align:right">
+                  <button id="copy-ip" class="copy-btn">Copy</button><br><br>
+                  <a class="play-btn" href="#">Play Now</a>
+                </div>
+              </div>
+              <div style="margin-top:12px" class="small muted">Status: <span id="status">Online</span> • Players: <span id="players">—</span></div>
+            </div>
+
+            <a class="cta" href="#" id="discord">Discord</a>
+            <a class="cta" href="#" id="store">Store</a>
           </div>
         </div>
+
+        <div class="content">
+          <div>
+            <div class="card">
+              <h2 style="margin:0 0 8px">Latest News</h2>
+
+              <div class="post">
+                <h3>BladeMC Chapter 2 — Season Live</h3>
+                <div class="muted small">by Admin • 2 days ago</div>
+                <p class="muted small" style="margin-top:8px">Naya season launch hua — naye maps aur rewards add kiye gaye. Server join karo aur rewards claim karo.</p>
+                <a class="small" href="#">Read more →</a>
+              </div>
+
+              <div class="post">
+                <h3>Server Maintenance</h3>
+                <div class="muted small">by Staff • 1 week ago</div>
+                <p class="muted small" style="margin-top:8px">Short maintenance scheduled — expect short downtime.</p>
+                <a class="small" href="#">Details →</a>
+              </div>
+
+              <div class="post">
+                <h3>Vote & Get Rewards</h3>
+                <div class="muted small">by Community • 3 weeks ago</div>
+                <p class="muted small" style="margin-top:8px">Vote for BladeMC on top lists and earn keys & cosmetics.</p>
+                <a class="small" href="#">Vote now →</a>
+              </div>
+
+            </div>
+          </div>
+
+          <aside style="width:100%;max-width:340px">
+            <div class="card">
+              <h3 style="margin:0 0 8px">Quick Links</h3>
+              <div class="small muted" style="line-height:1.6">
+                <div><a href="#">Server Rules</a></div>
+                <div><a href="#">Map</a></div>
+                <div><a href="#">Vote Rewards</a></div>
+                <div><a href="#">Apply Staff</a></div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:12px">
+              <h3 style="margin:0 0 8px">Store</h3>
+              <p class="muted small">Ranks, crates and cosmetics available — secure checkout.</p>
+              <a class="small" href="#">Open Store →</a>
+            </div>
+
+            <div class="card" style="margin-top:12px">
+              <h3 style="margin:0 0 8px">Server Map</h3>
+              <p class="muted small">Interactive map &amp; spawn areas.</p>
+              <a class="small" href="#">Open Map →</a>
+            </div>
+          </aside>
+        </div>
+
       </div>
 
-      <div>
-        <div class="card">
-          <h3>Preview</h3>
-          <div class="gallery">
-            <img src="https://via.placeholder.com/400x230?text=Image+1" alt="">
-            <img src="https://via.placeholder.com/400x230?text=Image+2" alt="">
-            <img src="https://via.placeholder.com/400x230?text=Image+3" alt="">
+      <div style="width:360px">
+        <div class="card" style="padding:18px;text-align:center">
+          <img src="https://via.placeholder.com/320x180?text=BladeMC+Banner" style="width:100%;border-radius:10px" alt="banner">
+          <h4 style="margin:10px 0 4px">BladeMC Events</h4>
+          <div class="muted small">Weekly FFA, Build contests and giveaways.</div>
+        </div>
+
+        <div class="card" style="margin-top:12px;padding:12px">
+          <h4 style="margin:0 0 8px">Connect</h4>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="cta" href="#" style="padding:8px 10px;font-size:13px">Discord</a>
+            <a class="cta" href="#" style="padding:8px 10px;font-size:13px">Forums</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="about" style="margin-top:18px">
-      <div class="card">
-        <h2>About</h2>
-        <p>Yahan apna short bio likho — name, age, class, skills wagairah. Replace kar do jo chahte ho.</p>
-      </div>
-    </section>
-
-    <section id="work" style="margin-top:18px">
-      <div class="card">
-        <h2>Work / Projects</h2>
-        <p style="color:#64748b">Project list ya links yahan dalo.</p>
-      </div>
-    </section>
-
-    <section id="contact" style="margin-top:18px">
-      <div class="card">
-        <h2>Contact</h2>
-        <!-- Formspree example: replace action URL with your own formspree endpoint -->
-        <form action="https://formspree.io/f/your-id" method="POST">
-          <div style="display:flex;gap:8px">
-            <input name="name" placeholder="Naam" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef6">
-            <input name="email" placeholder="Email" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef6">
-          </div><br>
-          <textarea name="message" rows="4" placeholder="Message" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef6"></textarea><br>
-          <button class="btn" type="submit">Send</button>
-        </form>
       </div>
     </section>
 
     <footer>
-      &copy; 2025 Mubashir — Built with ❤️
+      BladeMC &copy; <span id="year"></span> • Not affiliated with Mojang or Microsoft.
     </footer>
   </div>
+
+  <script>
+    // small interactivity (copy, status mock)
+    document.getElementById('year').innerText = new Date().getFullYear();
+    document.getElementById('copy-ip').addEventListener('click', async () => {
+      const ip = document.getElementById('server-ip').innerText;
+      try { await navigator.clipboard.writeText(ip); alert('IP copied: ' + ip); }
+      catch(e){ prompt('Copy this IP:', ip); }
+    });
+
+    // Also allow clicking "Play Now" to copy ip (for mobile)
+    document.querySelectorAll('.play-btn, .cta[href="#"]').forEach(el=>{
+      el.addEventListener('click', (e)=>{ e.preventDefault(); alert('Open Minecraft and connect to blademc.fun'); });
+    });
+
+    // mock status (replace with real API if available)
+    function updateStatus(){
+      // if you have a real status API, replace fetch below
+      // fetch('https://status-api.example.com/blademc').then(r=>r.json()).then(d=>{ ... })
+      document.getElementById('status').innerText = 'Online';
+      document.getElementById('players').innerText = '98/500';
+    }
+    updateStatus();
+  </script>
 </body>
 </html>
