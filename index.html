@@ -1,224 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BladeMC — Play Now</title>
-  <meta name="description" content="BladeMC — Play the best Minecraft gamemodes. Join blademc.fun" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BladeMC - Store</title>
   <style>
-    /* ---- Basic theme (AppleMC-like look) ---- */
-    :root{
-      --bg1: #071122; --bg2: #071226;
-      --card: rgba(255,255,255,0.03);
-      --muted: #9fb0bd;
-      --accent: #00d1b2;
-      --accent2:#64f3d6;
-      --glass: rgba(255,255,255,0.03);
-      --maxw:1200px;
-      --radius:14px;
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: white;
+      text-align: center;
+      padding: 30px;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,var(--bg1),var(--bg2));
-      color: #e8f3f6;
-      -webkit-font-smoothing:antialiased;
+    .card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
     }
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--maxw);margin:28px auto;padding:20px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));
-      display:flex;align-items:center;justify-content:center;font-weight:900;color:#022;font-size:26px;
+    h2 {
+      color: #ff6600;
     }
-    nav{display:flex;gap:14px;align-items:center}
-    nav a{color:var(--muted);font-weight:600}
-    .cta{background:var(--accent);color:#012;padding:10px 14px;border-radius:10px;font-weight:800}
-
-    /* hero */
-    .hero{display:flex;gap:24px;align-items:flex-start;margin-top:18px}
-    .hero-left{flex:1}
-    .title{font-size:40px;margin:0 0 8px;line-height:1.03}
-    .subtitle{color:var(--muted);margin:0 0 18px}
-    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .ip-card{
-      background:var(--card);padding:16px;border-radius:12px;width:380px;box-shadow:0 8px 30px rgba(2,6,23,.6);
+    .price {
+      font-size: 20px;
+      margin: 10px 0;
     }
-    .ip-label{font-size:12px;color:var(--muted)}
-    .ip-big{display:inline-block;margin-top:6px;padding:8px 12px;border-radius:10px;background:#eafdf7;color:#012;font-weight:800}
-    .copy-btn{margin-left:8px;padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);cursor:pointer}
-    .play-btn{display:inline-block;background:#12b981;color:#021;padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none}
-
-    /* content columns */
-    .content{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:22px}
-    .card{background:var(--card);padding:16px;border-radius:12px}
-    .post{border-radius:10px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:12px}
-    .post h3{margin:0 0 6px}
-    .muted{color:var(--muted)}
-    .small{font-size:13px}
-
-    /* footer */
-    footer{margin-top:22px;text-align:center;color:var(--muted);padding:18px 0}
-
-    /* responsive */
-    @media(max-width:980px){
-      .hero{flex-direction:column}
-      .content{grid-template-columns:1fr}
-      nav{display:none}
-      .ip-card{width:100%}
+    button {
+      padding: 10px 20px;
+      background: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff3300;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <div class="logo">B</div>
-        <div>
-          <div style="font-weight:800;font-size:16px">BladeMC</div>
-          <div style="font-size:12px;color:var(--muted)">Network • Lifesteal • SMP • FFA</div>
-        </div>
-      </div>
+  <h1>BladeMC Store</h1>
+  <p>Buy ranks & coins to support the server!</p>
 
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">Rules</a>
-        <a href="#">Vote</a>
-        <a href="#">Map</a>
-        <a href="#">Store</a>
-        <a href="#">Staff</a>
-        <a class="cta" href="#">Play</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div class="hero-left">
-        <div class="card" style="background:transparent;padding:0">
-          <h1 class="title">BladeMC — Join the Adventure</h1>
-          <p class="subtitle">Join BladeMC.fun for the best Lifesteal & Survival SMP experience. Fast queues, active staff and weekly events.</p>
-
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-            <div class="ip-card">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div class="ip-label">Server IP</div>
-                  <div><span class="ip-big" id="server-ip">blademc.fun</span></div>
-                </div>
-                <div style="text-align:right">
-                  <button id="copy-ip" class="copy-btn">Copy</button><br><br>
-                  <a class="play-btn" href="#">Play Now</a>
-                </div>
-              </div>
-              <div style="margin-top:12px" class="small muted">Status: <span id="status">Online</span> • Players: <span id="players">—</span></div>
-            </div>
-
-            <a class="cta" href="#" id="discord">Discord</a>
-            <a class="cta" href="#" id="store">Store</a>
-          </div>
-        </div>
-
-        <div class="content">
-          <div>
-            <div class="card">
-              <h2 style="margin:0 0 8px">Latest News</h2>
-
-              <div class="post">
-                <h3>BladeMC Chapter 2 — Season Live</h3>
-                <div class="muted small">by Admin • 2 days ago</div>
-                <p class="muted small" style="margin-top:8px">Naya season launch hua — naye maps aur rewards add kiye gaye. Server join karo aur rewards claim karo.</p>
-                <a class="small" href="#">Read more →</a>
-              </div>
-
-              <div class="post">
-                <h3>Server Maintenance</h3>
-                <div class="muted small">by Staff • 1 week ago</div>
-                <p class="muted small" style="margin-top:8px">Short maintenance scheduled — expect short downtime.</p>
-                <a class="small" href="#">Details →</a>
-              </div>
-
-              <div class="post">
-                <h3>Vote & Get Rewards</h3>
-                <div class="muted small">by Community • 3 weeks ago</div>
-                <p class="muted small" style="margin-top:8px">Vote for BladeMC on top lists and earn keys & cosmetics.</p>
-                <a class="small" href="#">Vote now →</a>
-              </div>
-
-            </div>
-          </div>
-
-          <aside style="width:100%;max-width:340px">
-            <div class="card">
-              <h3 style="margin:0 0 8px">Quick Links</h3>
-              <div class="small muted" style="line-height:1.6">
-                <div><a href="#">Server Rules</a></div>
-                <div><a href="#">Map</a></div>
-                <div><a href="#">Vote Rewards</a></div>
-                <div><a href="#">Apply Staff</a></div>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:12px">
-              <h3 style="margin:0 0 8px">Store</h3>
-              <p class="muted small">Ranks, crates and cosmetics available — secure checkout.</p>
-              <a class="small" href="#">Open Store →</a>
-            </div>
-
-            <div class="card" style="margin-top:12px">
-              <h3 style="margin:0 0 8px">Server Map</h3>
-              <p class="muted small">Interactive map &amp; spawn areas.</p>
-              <a class="small" href="#">Open Map →</a>
-            </div>
-          </aside>
-        </div>
-
-      </div>
-
-      <div style="width:360px">
-        <div class="card" style="padding:18px;text-align:center">
-          <img src="https://via.placeholder.com/320x180?text=BladeMC+Banner" style="width:100%;border-radius:10px" alt="banner">
-          <h4 style="margin:10px 0 4px">BladeMC Events</h4>
-          <div class="muted small">Weekly FFA, Build contests and giveaways.</div>
-        </div>
-
-        <div class="card" style="margin-top:12px;padding:12px">
-          <h4 style="margin:0 0 8px">Connect</h4>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <a class="cta" href="#" style="padding:8px 10px;font-size:13px">Discord</a>
-            <a class="cta" href="#" style="padding:8px 10px;font-size:13px">Forums</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      BladeMC &copy; <span id="year"></span> • Not affiliated with Mojang or Microsoft.
-    </footer>
+  <!-- Ranks -->
+  <div class="card">
+    <h2>Elite Rank</h2>
+    <p class="price">₹40</p>
+    <button>Buy Now</button>
   </div>
 
-  <script>
-    // small interactivity (copy, status mock)
-    document.getElementById('year').innerText = new Date().getFullYear();
-    document.getElementById('copy-ip').addEventListener('click', async () => {
-      const ip = document.getElementById('server-ip').innerText;
-      try { await navigator.clipboard.writeText(ip); alert('IP copied: ' + ip); }
-      catch(e){ prompt('Copy this IP:', ip); }
-    });
+  <div class="card">
+    <h2>Hero Rank</h2>
+    <p class="price">₹80</p>
+    <button>Buy Now</button>
+  </div>
 
-    // Also allow clicking "Play Now" to copy ip (for mobile)
-    document.querySelectorAll('.play-btn, .cta[href="#"]').forEach(el=>{
-      el.addEventListener('click', (e)=>{ e.preventDefault(); alert('Open Minecraft and connect to blademc.fun'); });
-    });
+  <div class="card">
+    <h2>Warrior Rank</h2>
+    <p class="price">₹180</p>
+    <button>Buy Now</button>
+  </div>
 
-    // mock status (replace with real API if available)
-    function updateStatus(){
-      // if you have a real status API, replace fetch below
-      // fetch('https://status-api.example.com/blademc').then(r=>r.json()).then(d=>{ ... })
-      document.getElementById('status').innerText = 'Online';
-      document.getElementById('players').innerText = '98/500';
-    }
-    updateStatus();
-  </script>
+  <div class="card">
+    <h2>Patron Rank</h2>
+    <p class="price">₹250</p>
+    <button>Buy Now</button>
+  </div>
+
+  <!-- Coins -->
+  <div class="card">
+    <h2>Coins Pack</h2>
+    <p class="price">₹60 / ₹120 / ₹190 / ₹280</p>
+    <button>Buy Coins</button>
+  </div>
+
+  <br>
+  <a href="index.html" style="color:#ff6600;">← Back to Home</a>
 </body>
 </html>
