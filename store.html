@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BladeMC Store</title>
+  <style>
+    :root{--bg:#071226;--card:rgba(255,255,255,0.03);--accent:#12b981;--muted:#9fb0bd}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#031026,#061225);color:#eaf6f4}
+    .wrap{max-width:1100px;margin:24px auto;padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;gap:12px;align-items:center}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .card{background:var(--card);padding:14px;border-radius:12px}
+    .card h3{margin:0 0 6px}
+    .price{font-weight:800;color:var(--accent);font-size:18px}
+    .btn{background:var(--accent);color:#021;padding:8px 10px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+    .cart{position:fixed;right:16px;bottom:16px;background:var(--card);padding:12px;border-radius:12px;width:300px;box-shadow:0 8px 30px rgba(2,6,23,.6)}
+    .cart h4{margin:0 0 6px}
+    .cart-row{display:flex;justify-content:space-between;margin:6px 0}
+    .small{font-size:13px;color:var(--muted)}
+    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.cart{width:90%;left:5%;right:5%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#12b981,#64f3d6);display:flex;align-items:center;justify-content:center;font-weight:900;color:#021">B</div>
+        <div>
+          <div style="font-weight:800">BladeMC Store</div>
+          <div class="small">Ranks • Coins • Keys</div>
+        </div>
+      </div>
+      <div><a href="/" style="color:inherit;text-decoration:none" class="small">Back to Home</a></div>
+    </header>
+
+    <section style="margin-top:18px">
+      <div class="small">Select items and checkout</div>
+
+      <div class="grid" id="products"></div>
+    </section>
+  </div>
+
+  <!-- Cart -->
+  <div class="cart" id="cartBox">
+    <h4>Cart</h4>
+    <div id="cartItems"></div>
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,0.04);margin:8px 0">
+    <div class="cart-row"><div class="small">Total</div><div id="total" class="price">$0.00</div></div>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <button class="btn" id="checkoutPayPal">Checkout (PayPal)</button>
+      <button class="btn" id="checkoutManual">Get Pay Link</button>
+    </div>
+    <div style="margin-top:8px" class="small">Note: PayPal option requires a business account for auto buttons. Manual link uses PayPal.Me or bank details.</div>
+  </div>
+
+<script>
+/* ====== PRODUCTS: Edit these entries with your names/prices/ids ======
+   price is in USD. currency can be changed later.
+   type: "rank" | "coins" | "key" (for your own logic)
+   id: unique product id (useful for webhooks)
+*/
+const PRODUCTS = [
+  { id: "rank_vip", name: "VIP Rank", type: "rank", price: 5.00, desc: "Donor rank - small perks" },
+  { id: "rank_pro", name: "PRO Rank", type: "rank", price: 12.00, desc: "Bigger perks + cosmetics" },
+  { id: "coins_1000", name: "1000 Coins", type: "coins", price: 3.00, desc: "In-game currency" },
+  { id: "crate_key", name: "Mystery Key", type: "key", price: 2.50, desc: "Opens a random crate" },
+  { id: "rank_elite", name: "ELITE Rank", type: "rank", price: 25.00, desc: "Top donor rank" },
+  { id: "coins_5000", name: "5000 Coins", type: "coins", price: 12.00, desc: "Best value pack" }
+];
+
+const currency = "USD"; // display currency
+
+/* ====== RENDER PRODUCTS ====== */
+const productsEl = document.getElementById('products');
+PRODUCTS.forEach(p=>{
+  const div = document.createElement('div'); div.className='card';
+  div.innerHTML = `<h3>${p.name}</h3><div class="small">${p.desc}</div><div style="margin-top:8px" class="price">$${p.price.toFixed(2)}</div>
+    <div style="margin-top:10px"><button class="btn" onclick="addToCart('${p.id}')">Add to cart</button></div>`;
+  productsEl.appendChild(div);
+});
+
+/* ====== CART LOGIC ====== */
+let CART = []; // {id, qty}
+function addToCart(id){
+  const item = CART.find(x=>x.id===id);
+  if(item) item.qty++;
+  else CART.push({id, qty:1});
+  renderCart();
+}
+function removeFromCart(id){
+  CART = CART.filter(x=>x.id!==id);
+  renderCart();
+}
+function changeQty(id, q){
+  const item = CART.find(x=>x.id===id);
+  if(!item) return;
+  item.qty = Math.max(1, q);
+  renderCart();
+}
+function renderCart(){
+  const box = document.getElementById('cartItems');
+  box.innerHTML = '';
+  let total = 0;
+  CART.forEach(ci=>{
+    const p = PRODUCTS.find(x=>x.id===ci.id);
+    total += p.price * ci.qty;
+    const row = document.createElement('div');
+    row.className='cart-row';
+    row.innerHTML = `<div style="flex:1">${p.name} <div class="small muted">x${ci.qty}</div></div>
+      <div style="text-align:right"><div class="small">$${(p.price*ci.qty).toFixed(2)}</div>
+      <div style="margin-top:6px"><button onclick="changeQty('${ci.id}', ${ci.qty-1})" class="small">-</button>
+      <button onclick="changeQty('${ci.id}', ${ci.qty+1})" class="small">+</button>
+      <button onclick="removeFromCart('${ci.id}')" class="small">Remove</button></div></div>`;
+    box.appendChild(row);
+  });
+  document.getElementById('total').innerText = `$${total.toFixed(2)}`;
+}
+window.renderCart = renderCart;
+
+/* ====== CHECKOUT HANDLERS ====== */
+/* 1) Manual Pay Link (PayPal.Me or your bank details) 
+   This will create a small invoice message for buyer to copy and send payment.
+*/
+document.getElementById('checkoutManual').addEventListener('click', ()=>{
+  if(CART.length===0){ alert('Cart is empty'); return; }
+  // Build summary
+  let text = 'BladeMC Store Order:%0A';
+  let total = 0;
+  CART.forEach(ci=>{
+    const p = PRODUCTS.find(x=>x.id===ci.id);
+    text += `${p.name} x${ci.qty} - $${(p.price*ci.qty).toFixed(2)}%0A`;
+    total += p.price*ci.qty;
+  });
+  text += `Total: $${total.toFixed(2)}%0A%0A`;
+  text += 'Pay via PayPal.Me: https://paypal.me/YourPayPalName/' + total.toFixed(2) + '%0A';
+  text += 'After payment, send TXN ID and your Minecraft name to our Discord (link) for manual delivery.';
+  // show prompt with message
+  const res = confirm('Open a message with payment instructions? (You will need to fill your PayPal.Me username in code)');
+  if(res) {
+    // Open mailto or prompt (simple)
+    window.open('mailto:?subject=BladeMC%20Store%20Order&body=' + text, '_blank');
+  }
+});
+
+/* 2) PayPal Checkout (simple redirect to PayPal with amount) 
+   NOTE: This uses PayPal.Me. For real integration use PayPal Buttons or server-side Orders API.
+*/
+document.getElementById('checkoutPayPal').addEventListener('click', ()=>{
+  if(CART.length===0){ alert('Cart is empty'); return; }
+  let total = 0;
+  CART.forEach(ci=>{ const p = PRODUCTS.find(x=>x.id===ci.id); total += p.price*ci.qty; });
+  // CHANGE paypalMeUsername below to your real username
+  const paypalMeUsername = 'YourPayPalName';
+  if(paypalMeUsername==='YourPayPalName'){ alert('Set your PayPal.Me username in the store code first'); return; }
+  const url = `https://paypal.me/${paypalMeUsername}/${total.toFixed(2)}`;
+  window.open(url, '_blank');
+});
+
+/* ====== AFTER PAYMENT: Delivery notes ======
+  - Manual: you will check transaction and give rank/coins via server console or plugin.
+  - Automatic (recommended): Use Tebex (Buycraft) or custom Stripe/PayPal server + webhook to call your server plugin and give ranks automatically.
+*/
+
+/* ====== OPTIONAL: Prepare a JSON order (for server) ====== */
+function prepareOrderData(){
+  if(CART.length===0) return null;
+  let total = 0;
+  const items = CART.map(ci=>{
+    const p = PRODUCTS.find(x=>x.id===ci.id);
+    total += p.price*ci.qty;
+    return { id:p.id, name:p.name, qty:ci.qty, price:p.price };
+  });
+  return { items, total, currency };
+}
+
+/* ====== For debugging show order in console ====== */
+window.prepareOrderData = prepareOrderData;
+</script>
+</body>
+</html>
